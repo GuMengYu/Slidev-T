@@ -7,8 +7,8 @@ const props = defineProps({
     type: String,
     default: 'BASIC'
   },
-  width: Number,
-  height: Number
+  width: [Number, String],
+  height: [Number, String]
 })
 useRender(container, props.type, props.width, props.height)
 onActivated(() => {

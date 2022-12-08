@@ -14,15 +14,44 @@ export function useRoad(width = 426, height = 426) {
     camera.position.set(0, 50, 100)
     camera.lookAt(0, 0, 0)
 
-    // 辅助坐标系
-    const gridHelper = new Three.GridHelper(100, 20, 0xffffff, 0xffffff);
-    scene.add(gridHelper)
+    // // 辅助坐标系
+    // const gridHelper = new Three.GridHelper(100, 20, 0xffffff, 0xffffff);
+    // scene.add(gridHelper)
 
     //Light
     scene.add(new Three.AmbientLight(0xffffff, 0.2))
     const dLight = new Three.DirectionalLight(0xffffff)
     dLight.position.set(0, 1, 1)
     scene.add(dLight)
+
+    const sun = new Three.PointLight(0xffee88)
+    sun.add(new Mesh(new Three.SphereGeometry(), new Three.MeshStandardMaterial({
+      emissive: 0xffffee,
+      emissiveIntensity: 1,
+      color: 0x000000
+    })))
+    // sun.power = 100
+    sun.position.set(50, 50, -60)
+    scene.add(sun)
+
+
+    // envmap
+    const genCubeUrls = function ( prefix, postfix ) {
+
+      return [
+        prefix + 'px' + postfix, prefix + 'nx' + postfix,
+        prefix + 'py' + postfix, prefix + 'ny' + postfix,
+        prefix + 'pz' + postfix, prefix + 'nz' + postfix
+      ];
+
+    };
+
+    const urls = genCubeUrls( '/images/skyboxsun/', '.jpg' );
+
+    new Three.CubeTextureLoader().load(urls, (cubeTexture) => {
+      cubeTexture.encoding = Three.sRGBEncoding
+      scene.background = cubeTexture
+    })
 
     // const cube = new Three.Mesh(new Three.BoxGeometry(100,100,100), new Three.MeshBasicMaterial({color: 0xff00ff}))
 
@@ -32,11 +61,11 @@ export function useRoad(width = 426, height = 426) {
 
     // 草坪
     const gassGroup = new Three.Group()
-    const plane1 = new Three.Mesh(new Three.PlaneGeometry(100, 50), new Three.MeshBasicMaterial({ color: 0x61974b }))
+    const plane1 = new Three.Mesh(new Three.PlaneGeometry(100, 50), new Three.MeshPhongMaterial({ color: 0x61974b, side: Three.DoubleSide}))
     plane1.rotation.x = -0.5 * Math.PI
     plane1.position.z = -25
 
-    const plane2 = new Three.Mesh(new Three.PlaneGeometry(100, 50), new Three.MeshBasicMaterial({ color: 0xb1d744 }))
+    const plane2 = new Three.Mesh(new Three.PlaneGeometry(100, 50), new Three.MeshPhongMaterial({ color: 0xb1d744, side: Three.DoubleSide }))
     plane2.rotation.x = -0.5 * Math.PI
     plane2.position.z = 25
     gassGroup.add(plane1, plane2)
@@ -103,7 +132,7 @@ export function useRoad(width = 426, height = 426) {
 
     const buildingGroup = new Three.Group()
     const buildingNum = 20
-    const buildingMaterial = new Three.MeshStandardMaterial({ color: 0x75d1c2 })
+    const buildingMaterial = new Three.MeshPhongMaterial({ color: 0x6667ab, shininess: 0 })
     for (let i = 0; i < buildingNum; i++) {
       const width = Math.random() * 25
       const height = Math.random() * 25
@@ -148,6 +177,7 @@ export function useRoad(width = 426, height = 426) {
 
     renderer.setSize(width, height)
     renderer.render(scene, camera);
+    renderer.setPixelRatio(window.devicePixelRatio)
     container.appendChild(renderer.domElement)
 
 

@@ -2,35 +2,33 @@
 import { Scene, PerspectiveCamera, WebGLRenderer } from 'three'
 import * as Three from 'three'
 import Stat from 'three/examples/jsm/libs/stats.module'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 
 
-export function useBasic(width = 426, height = 426) {
-	let renderer, camera, scene, clock = new Three.Clock(), controls;
+export function useMovement(width = 426, height = 426) {
+	let renderer, camera, scene, clock = new Three.Clock(), controls, cube;
 
 	function init(container) {
-
+	
 		// 场景-容器
 		scene = new Scene()
-
+		
 		// 相机
 		camera = new PerspectiveCamera(75, width / height, 0.1, 10000)
-		camera.position.set(3, 3, 3)
-		camera.lookAt(0, 0, 0)
-		// 光线
-		const light = new Three.AmbientLight()
-		scene.add(light)
+		camera.position.set(5,5,5)
+		camera.lookAt(0 ,0 ,0)
+		
+		// 辅助坐标系
+		const axes = new Three.AxesHelper(5)
+		scene.add(axes)
 
-		const geometry = new Three.BoxGeometry(2, 2, 2);
-		const material = new Three.MeshNormalMaterial();
-		const cube = new Three.Mesh(geometry, material)
-
-
-
+		cube = new Three.Mesh(new Three.BoxGeometry(2,2,2), new Three.MeshBasicMaterial({color: 0x6667ab}))
+		
+		
 		scene.add(cube)
-
+		
 		// 渲染器
-		renderer = new Three.WebGLRenderer()
+		renderer = new WebGLRenderer()
 		renderer.setPixelRatio(window.devicePixelRatio)
 		renderer.setSize(width, height)
 		container.appendChild(renderer.domElement)
@@ -40,12 +38,15 @@ export function useBasic(width = 426, height = 426) {
 		render()
 	}
 	function render() {
-		renderer.render(scene, camera);
+		renderer.render( scene, camera );
 		controls.update()
 	}
-
+	
 	function animate() {
-		requestAnimationFrame(animate);
+		requestAnimationFrame( animate );
+		const time = clock.getElapsedTime()
+		cube.rotation.x = (time * 50	) / 180 * Math.PI
+		cube.position.x = Math.sin(time) * 2
 		render()
 	}
 	return {

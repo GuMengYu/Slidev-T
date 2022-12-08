@@ -2,16 +2,20 @@ lockfileVersion: 5.4
 
 specifiers:
   '@slidev/cli': ^0.37.1
+  '@slidev/theme-apple-basic': ^0.20.0
   '@slidev/theme-default': '*'
   '@slidev/theme-seriph': '*'
+  '@slidev/theme-shibainu': ^0.0.2
   '@types/three': ^0.146.0
   dat.gui: ^0.7.9
   three: ^0.147.0
 
 dependencies:
   '@slidev/cli': 0.37.1_postcss@8.4.19
+  '@slidev/theme-apple-basic': 0.20.0
   '@slidev/theme-default': 0.21.2
   '@slidev/theme-seriph': 0.21.3
+  '@slidev/theme-shibainu': 0.0.2
   '@types/three': 0.146.0
   dat.gui: 0.7.9
   three: 0.147.0
@@ -631,6 +635,16 @@ packages:
       js-yaml: 4.1.0
     dev: false
 
+  /@slidev/theme-apple-basic/0.20.0:
+    resolution: {integrity: sha512-sjgxAyn63TNHsiwT/Iz2D8IjpuOg/x8l+nG2TTH3zg8XChIo7uYcNNApWH+i5zuBfaNHHUOaGLPaZw5s6fINQg==}
+    engines: {node: '>=14.0.0', slidev: '>=0.19.3'}
+    dependencies:
+      '@slidev/types': 0.22.7
+      codemirror-theme-vars: 0.1.1
+      prism-theme-vars: 0.2.4
+      theme-vitesse: 0.1.14
+    dev: false
+
   /@slidev/theme-default/0.21.2:
     resolution: {integrity: sha512-neUucFs2YrRZZd73QwvLTyRG/o1nerDFUR5t8YAmXVLTMzWfY71flQ6aAhjYf+WjsozYsOHcxi/pZtIzZ4VhTQ==}
     engines: {node: '>=14.0.0', slidev: '>=0.19.2'}
@@ -644,6 +658,16 @@ packages:
   /@slidev/theme-seriph/0.21.3:
     resolution: {integrity: sha512-cLya6O4hmcLHUhloCMPPoKMLX27Q+8M8pRS82BSsLXVeXTXrlpc3l3glx5VB738p+NQr7FgqFN6H2CXQRoVv9Q==}
     engines: {node: '>=14.0.0', slidev: '>=0.19.3'}
+    dependencies:
+      '@slidev/types': 0.22.7
+      codemirror-theme-vars: 0.1.1
+      prism-theme-vars: 0.2.4
+      theme-vitesse: 0.1.14
+    dev: false
+
+  /@slidev/theme-shibainu/0.0.2:
+    resolution: {integrity: sha512-iLGt1UfX9tQMfPQclLMQRNM2DPasWksP/jGr7bKu5NdoPBNHSzYf086A4h46HiNlWOloEnxtAvG1VTdMCKfpIg==}
+    engines: {node: '>=14.0.0'}
     dependencies:
       '@slidev/types': 0.22.7
       codemirror-theme-vars: 0.1.1

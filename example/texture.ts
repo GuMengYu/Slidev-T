@@ -16,12 +16,13 @@ export function useTexture(width = 426, height = 426) {
     if (!container) return
     // 场景-容器
     scene = new Scene()
+    const axesHelper = new Three.AxesHelper(5)
 
     const light = new Three.AmbientLight(0x404040); // soft white light
-    scene.add(light);
+    scene.add(light, axesHelper);
     // 相机
     camera = new PerspectiveCamera(50, width / height, 0.1, 100)
-    camera.position.set(-4, 4, 2)
+    camera.position.set(5, 5, 5)
     camera.lookAt(0, 0, 0)
 
     const textureLoader = new Three.TextureLoader()
@@ -44,12 +45,12 @@ export function useTexture(width = 426, height = 426) {
     const m6 = new Three.MeshBasicMaterial({
       map: textureLoader.load(disturb)
     })
-    const cube = new Three.Mesh(new Three.BoxGeometry(2, 2, 2), [m1, m2, m3, m4, m5, m6])
+    const cube = new Three.Mesh(new Three.BoxGeometry(1.2, 1.2, 1.2), [m1, m2, m3, m4, m5, m6])
 
     const earth = new Three.Mesh(new Three.SphereGeometry(1, 500, 500), new MeshBasicMaterial({ map: textureLoader.load(land_ocean_ice_cloud_2048) }))
 
-    earth.position.set(4, 0, 0)
-
+    earth.position.set(0, 0, 0)
+    cube.position.set(0, 2, 0)
 
     scene.add(cube, earth)
 

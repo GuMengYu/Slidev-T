@@ -41,7 +41,6 @@ export function useLight(width = 426, height = 426) {
   let previousShadowMap = false
   
   function init(container) {
-    console.log(container, container.clientHeight, container.clientWidth)
     // // fps显示
     // stat = new Stat()
     // container.append(stat.dom)
