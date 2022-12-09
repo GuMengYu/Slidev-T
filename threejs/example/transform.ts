@@ -1,7 +1,6 @@
 
 import { Scene, PerspectiveCamera, WebGLRenderer } from 'three'
 import * as Three from 'three'
-import Stat from 'three/examples/jsm/libs/stats.module'
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 
 

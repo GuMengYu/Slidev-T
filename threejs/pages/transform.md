@@ -10,10 +10,14 @@
   3. scale 缩放
 
 ```javascript
+
+// 辅助坐标系
+const axes = new Three.AxesHelper(5)
+scene.add(axes)
+
 const cube = new Three.Mesh(...)
 
 cube.position.set(1,1,1)
-
 cube.position.x = 1
 cube.position.y = 1
 cube.position.z = 1
